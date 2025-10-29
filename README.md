@@ -1,4 +1,4 @@
-# Parcial de GraphQL con persistencia en MongoDB
+# Parcial de GraphQL con persistencia en MongoDB (CRUD)
  - Electiva II (Desarrollo Web).
 
 ## Descripción
@@ -6,59 +6,80 @@ Este proyecto implementa una API GraphQL para gestionar un sistema de consultas 
 
 ## Queries Disponibles
 
-### Obtener todos los usuarios
+### Obtener todos los platos
 ```graphql
 query {
-     getAllUsers {
-          id
-          name
-          email
-     }
+  getAllDishes {
+    id
+    idDish
+    name
+    calories
+  }
 }
 ```
 
-### Obtener usuario por ID
+### Obtener un plato por ID
 ```graphql
 query {
-     getUserById(id: "1") {
-          id
-          name
-          email
-     }
+  getDishById(id: "657ba065209d546c01da5a14") {
+    id
+    idDish
+    name
+    calories
+  }
 }
 ```
 
-### Crear nuevo usuario
+### Obtener platos por rango de calorías
 ```graphql
-mutation {
-     createUser(input: {
-          name: "John Doe",
-          email: "john@example.com"
-     }) {
-          id
-          name
-          email
-     }
+query {
+  getDishesByCaloriesRange(min: 100, max: 500) {
+    id
+    name
+    calories
+  }
 }
 ```
 
-### Actualizar usuario
+### Crear un nuevo plato
 ```graphql
 mutation {
-     updateUser(id: "1", input: {
-          name: "John Updated",
-          email: "john.updated@example.com"
-     }) {
-          id
-          name
-          email
-     }
+  createDish(input: {
+    idDish: "5115",
+    name: "Pasta a la bolognesa",
+    calories: 1500,
+    isVegetarian: false,
+    value: 5000,
+    comments: "Rica pasta casera"
+  }) {
+    id
+    idDish
+    name
+    calories
+  }
 }
 ```
 
-### Eliminar usuario
+### Actualizar un plato
 ```graphql
 mutation {
-     deleteUser(id: "1")
+  updateDish(id: "657ba065209d546c01da5a14", input: {
+    name: "Arroz con Huevo - Nuevo",
+    calories: 220,
+    value: 2300,
+    isVegetarian: true,
+    comments: "Actualizado"
+  }) {
+    id
+    name
+    calories
+  }
+}
+```
+
+### Eliminar un plato
+```graphql
+mutation {
+  deleteDish(id: "690162b33b95b5a2c516a3c1")
 }
 ```
